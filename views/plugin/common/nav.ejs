@@ -1,0 +1,18 @@
+<nav>
+    <div class="side-barbtn">
+        <i class='bx bx-menu menu'></i>
+        <span><%= heading %> </span>
+    </div>
+    <div class="user">
+        <i class='bx bxs-user'></i>
+        <span><%= user %> </span>
+        <a href="/logout"><i class='bx bx-log-out bx-rotate-180' class="logout"></i></a>
+    </div>
+</nav>
+<style>  
+@media screen and (max-width : 600px){
+    .user span {
+        display: none;
+    }
+}
+</style>

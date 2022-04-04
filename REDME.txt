@@ -1,0 +1,51 @@
+﻿Node js -> is a engine which run the code.
+express -> it is a module in which their are inbuild function used for web development.
+pub -> it is a tempelate engine which make a template ready (integrate CSS,HTML,JS
+ file) before sending it to browser.
+----------------------------------------------------------------------------------------------
+
+file system:
+
+app.js
+|
+views  (html->pug files)
+|
+static  (css,js files)
+|
+node_modules
+|
+|--Modulesinstalled
+|
+packeg_lock.json
+|
+packeg.json
+
+----------------------------------------------------------------------------------------------
+
+task 1:
+player joined will be also updated in tour_bgmi database
+status -> done 
+
+task:2
+Dashboard
+status -> pending
+
+task:3
+Tournament > remove player card
+status -> done
+
+task:4
+Tournament > remove tournament card
+status -> pending
+
+task:5
+Tournament > sheduled time specification
+status -> pending
+
+task:6
+environment variable set
+status -> done
+
+task:7
+result page 
+status -> pending

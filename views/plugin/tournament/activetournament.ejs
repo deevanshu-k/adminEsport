@@ -1,0 +1,48 @@
+<div class="activetournament">
+    <div class="head">Active Tournament</div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Rstatus</th>
+                    <th>Win Prize</th>
+                    <th>Per Kill</th>
+                    <th>Entry Fees</th>
+                    <th>Type</th>
+                    <th>Version</th>
+                    <th>Map</th>
+                    <th>Sheduled On</th>
+                    <th>Total Player</th>
+                    <th>Player Joined</th>
+                    <th>Rpay</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0; i < data.length; i++) { %>
+                    <% if (data.length === 0) { %>
+                       <% exit; %>
+                    <% } %>
+                    <% if (data[i].status != 1) { %>
+                       <% continue; %>
+                    <% } %>
+                    <tr>
+                        <td><%= data[i].indexs %> </td>
+                        <td><%= data[i].rstatus %> </td>
+                        <td><%= data[i].win_prize %></td>
+                        <td><%= data[i].per_kill %></td>
+                        <td><%= data[i].entry_fees %></td>
+                        <td><%= data[i].type %></td>
+                        <td><%= data[i].version %></td>
+                        <td><%= data[i].map %></td>
+                        <td><%= data[i].sheduled_on %></td>
+                        <td><%= data[i].total_player %></td>
+                        <td><%= data[i].player_joined %></td>
+                        <td><%= data[i].rpay_link %></td>
+                    </tr>
+                <%}%>
+
+            </tbody>
+        </table>
+    </div>
+</div>

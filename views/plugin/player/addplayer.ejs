@@ -1,0 +1,26 @@
+<div class="add_player">
+    <div class="head">Add Player</div>
+    <div class="addform">
+        <form action="http://<%= host %>:<%= port %>/player/updateap" method="post">
+            <p>
+                <label for="">Index</label>
+                <input type="number" required name="index" id="">
+            </p>
+            <p>
+                <label for="">Username</label>
+                <input type="text" required name="username" id="">
+            </p>
+            <p>
+                <label for="">Speciality</label>
+                <input type="text" required name="speciality" id="">
+            </p>
+            <p>
+                <label for="">Enroll Date</label>
+                <input type="date" required name="date" id="">
+            </p>
+            <p>
+                <input type="submit" value="Update">
+            </p>
+        </form>
+    </div>
+</div>

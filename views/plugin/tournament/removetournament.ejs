@@ -1,0 +1,49 @@
+<div class="remove_tour">
+    <div class="head">Remove Tournament</div>
+    <div class="addform">
+        <form id="rtour">
+            <p>
+                <label for="">Index</label>
+                <input type="number" required name="index" id="">
+            </p>
+            <p>
+                <input type="submit" value="Update">
+            </p>
+            <div class="rtourerror"></div>
+
+            <!-- <p>
+            </p> -->
+        </form>
+    </div>
+</div>
+<script>
+    const form = document.querySelector('#rtour');
+    const rtourerror = document.querySelector('.rtourerror');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        rtourerror.textcontent = '';
+
+        const index = form.index.value;
+
+        let res = await fetch('/tournament/removetour', {
+            method: 'POST',
+            body: JSON.stringify({ index }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        const data = await res.json();
+        if (res.status === 505) {
+            rtourerror.textContent = data.error;
+            setTimeout(() => {
+                rtourerror.textContent = '';
+            }, 3000);
+        }
+        else {
+            rtourerror.textContent = data.error;
+            setTimeout(() => {
+                rtourerror.textContent = '';
+            }, 3000);
+        }
+    });
+</script>

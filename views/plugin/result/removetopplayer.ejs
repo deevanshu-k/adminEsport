@@ -1,0 +1,79 @@
+<div class="remove_top_player">
+    <div class="head">Remove Top Player</div>
+    <div class="addform">
+        <form action="http://<%= host %>:<%= port %>/result/removetopplayer" method="post">
+
+            <p>
+                <label for="">Username</label>
+                <select name="name" id="tpDataso" required>
+                    <option value="">--name--</option>
+                    <% if (tpData.length !=0){ %>
+
+                        <% for(var i=0; i < tpData.length; i++) { %>
+                            <option value="<%= tpData[i].name %>">
+                                <%= tpData[i].name %>
+                            </option>
+
+                            <% } %>
+                    <% } %>
+
+                </select>
+            </p>
+            <p>
+                <input type="submit" value="Remove">
+            </p>
+        </form>
+    </div>
+</div>
+<script>
+    // add_total_player
+    // remove_player
+    const addtopplayer = document.querySelector('#addtopplayer_form');
+    const atopplayererror = document.querySelector('.atopplayererror');
+
+    addtopplayer.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        atopplayererror.textcontent = '';
+
+
+        const name = addtopplayer.name.value;
+        const kills = addtopplayer.kills.value;
+        const speciality = addtopplayer.speciality.value;
+        const index = addtopplayer.index.value;
+
+
+
+        let res = await fetch('/result/addtopplayer', {
+            method: 'POST',
+            body: JSON.stringify({ index, name, kills, speciality }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        const data = await res.json();
+        if (res.status === 505) {
+            atopplayererror.textContent = data.Status;
+            setTimeout(() => {
+                atopplayererror.textContent = '';
+            }, 3000);
+           
+        }
+        else {
+            atopplayererror.textContent = data.Status;
+            setTimeout(() => {
+                atopplayererror.textContent = '';
+            }, 3000);
+            var tpDataso = document.getElementById(`tpDataso`)
+            var option = `
+            <option value="${name}">${name}</option>
+                   `
+            tpDataso.innerHTML += option;
+        }
+        addtopplayer.name.value = '';
+        addtopplayer.kills.value = '';
+        addtopplayer.speciality.value = '';
+        addtopplayer.index.value = '';
+        console.log(data);
+
+
+    });
+</script>

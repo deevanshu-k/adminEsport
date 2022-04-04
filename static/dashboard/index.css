@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@600&family=Cabin&family=Inconsolata:wdth,wght@100,500;101.8,533&family=Mochiy+Pop+One&family=Rubik&display=swap");
+* {
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.left-panel {
+  background-color: rgb(56, 56, 61);
+  width: 230px;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+}
+
+.active:nth-child(1) {
+  width: 60px;
+}
+
+.active:nth-child(1) span {
+  display: none;
+}
+
+.active:nth-child(1) .heading i {
+  margin-right: 0px;
+  font-size: 30px;
+}
+
+.active:nth-child(1) i {
+  font-size: 24px;
+}
+
+.left-panel .heading {
+  width: 100%;
+  height: 60px;
+  color: white;
+  font-family: "Baloo Bhai 2", cursive;
+  font-family: "Cabin", sans-serif;
+  font-family: "Inconsolata", monospace;
+  font-family: "Mochiy Pop One", sans-serif;
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+
+}
+
+.left-panel .heading i {
+  margin-right: 10px
+}
+
+.links {
+  /* width: 100%; */
+  padding-top: 20px;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.links ul{
+  list-style: none;
+  padding: 0px;
+}
+x
+.links ul li {
+  width: 100%;
+  /* margin-top: 50px; */
+}
+.links ul li a{
+  width: 100%;
+  padding: 6px 0px;
+  color: whitesmoke;
+  font-family: "Baloo Bhai 2", cursive;
+  font-family: "Cabin", sans-serif;
+  font-family: "Inconsolata", monospace;
+  font-family: "Mochiy Pop One", sans-serif;
+  font-family: "Rubik", sans-serif;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.links ul li a:hover {
+  color: rgba(245, 245, 245, 0.712);
+}
+
+.links ul li a i {
+  margin: 0px 15px;
+}
+
+/* right-panel  */
+
+.right-panel {
+  background-color: whitesmoke;
+  width: calc(100% - 230px);
+  min-height: 100vh;
+  position: relative;
+  left: 230px;
+}
+
+.active:nth-child(2) {
+  width: calc(100% - 60px);
+  left: 60px;
+}
+
+.active:nth-child(2) nav {
+  width: calc(100% - 60px);
+}
+
+.right-panel nav {
+  background-color: white;
+  height: 60px;
+  padding: 0px 10px;
+  position: fixed;
+  width: calc(100% - 230px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.5s ease;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: "Baloo Bhai 2", cursive;
+  font-family: "Cabin", sans-serif;
+  font-family: "Inconsolata", monospace;
+  font-family: "Mochiy Pop One", sans-serif;
+  font-family: "Rubik", sans-serif;
+}
+
+.right-panel nav i {
+  font-size: 25px;
+  margin: 0px 4px;
+}
+
+.right-panel nav .side-barbtn {
+  font-size: 25px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.right-panel nav .side-barbtn i {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.right-panel nav .side-barbtn i:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 3px 20px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.right-panel nav .user {
+  font-family: "Baloo Bhai 2", cursive;
+  font-family: "Cabin", sans-serif;
+  font-family: "Inconsolata", monospace;
+  font-family: "Mochiy Pop One", sans-serif;
+  font-family: "Rubik", sans-serif;
+  font-size: 20px;
+  border: 2px solid rgb(207, 207, 207);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: bolder;
+}
+
+.right-panel nav .user i:hover {
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 3px 20px 0 rgba(0, 0, 0, 0.1); */
+  /* color: black; */
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+/* body  */
+
+.right-panel .body {
+  padding: 70px 20px;
+  /* position: relative; */
+  /* top: 60px; */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* player joined */
+.player-joined {
+  background-color: white;
+  width: 230px;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player-joined .head {
+  font-weight: bold;
+}
+
+/* result visible  */
+.result-visible {
+  background-color: white;
+  width: 230px;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-visible .head {
+  font-weight: bold;
+}
+
+/* infototal */
+
+.right-panel .body .states {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.infototal {
+  background-color: white;
+  height: 55px;
+  padding: 5px;
+  margin: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.infototal {
+  
+}
+
+.infototal .num{
+  color: rgba(255, 0, 0, 0.733);
+  /* font-size: 24px; */
+}
+
+/* common  */
+.left-panel,.right-panel {
+  transition: all 0.5s ease;
+}

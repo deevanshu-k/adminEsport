@@ -1,0 +1,18 @@
+<div class="remove_player">
+    <div class="head">Remove Player</div>
+    <div class="addform">
+        <form action="http://<%= host %>:<%= port %>/player/updaterp" method="post">
+            <p>
+                <label for="">Index</label>
+                <input type="number" required name="index" id="">
+            </p>
+            <p>
+                <label for="">Username</label>
+                <input type="text" required name="username" id="">
+            </p>
+            <p>
+                <input type="submit" value="Remove">
+            </p>
+        </form>
+    </div>
+</div>

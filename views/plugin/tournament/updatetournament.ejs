@@ -1,0 +1,42 @@
+<div class="updatetournament">
+    <div class="head">Update Tournament</div>
+    <div class="updateform">
+        <form action="http://<%= host %>:<%= port %>/tournament/update" method="post">
+            <p>
+                <label for="" style="padding: 0px 6px;">Index</label>
+                <input type="number" name="index" id="" required>
+            </p>
+            <p>
+                <select name="updatetext" id="">
+                    <option value="">--Select--</option>
+                    <option value="type">Type</option>
+                    <option value="version">Version</option>
+                    <option value="map">Map</option>
+                    <option value="rpay_link">Payment link</option>
+                </select>
+                
+                <input type="text" name="textvalue" id="">
+            </p>
+            <p>
+                <select name="updateint" id="">
+                    <option value="">--Select--</option>
+                    <option value="status">Status</option>
+                    <option value="rstatus">Rstatus</option>
+                    <option value="win_prize">Win Prize</option>
+                    <option value="per_kill">Per Kill</option>
+                    <option value="entry_fees">Entry Fee</option>
+                    <option value="total_player">Total Player</option>
+                </select>
+                
+                <input type="number" name="intvalue" id="">
+            </p>
+            <p>
+                <label for="">Sheduled On</label>
+                <input type="date" name="date" id="">
+            </p>
+            <p>
+                <input type="submit" value="Update">
+            </p>
+        </form>
+    </div>
+</div>

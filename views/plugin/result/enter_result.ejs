@@ -1,0 +1,144 @@
+<div class="edit_result">
+    <div class="head">Edit Result</div>
+    <div class="addform">
+        <form action="/result/editresult" method="POST">
+            <p>
+                <label for="">Index</label>
+                <input type="number" required name="index" id="">
+            </p>
+            <p>
+                <input type="submit" value="Update">
+            </p>
+        </form>
+    </div>
+    <% if (data.length !=0){ %>
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Speciality</th>
+                        <th>Per Kill</th>
+                    </tr>
+                </thead>
+                <tbody id="kills_data">
+                    <% for(var i=0; i < data.length; i++) { %>
+                        <tr id="tr-<%= i %>">
+                            <td>
+                                <%= data[i].name %>
+                            </td>
+                            <td>
+                                <%= data[i].speciality %>
+                            </td>
+                            <td>
+
+
+
+                                <%= data[i].kills %>
+
+                            </td>
+                        </tr>
+                        <% } %>
+                            <tr>
+                                <form action="" class="kill_change" method="post">
+                                    <td>
+
+                                        <select name="index" id="">
+                                            <option value="<%= index %>">
+                                                <%= index %>
+                                            </option>
+
+                                        </select>
+                                        <select name="name" id="" required>
+                                            <option value="">--name--</option>
+                                            <% for(var i=0; i < data.length; i++) { %>
+                                                <option value="<%= data[i].name %>">
+                                                    <%= data[i].name %>
+                                                </option>
+
+                                                <% } %>
+
+                                        </select>
+
+
+                                    </td>
+                                    <td id="killinput">
+
+                                        <input type="number" name="kills" placeholder="kill" required>
+                                    </td>
+                                    <td>
+
+                                        <button>Change</button>
+
+                                    </td>
+
+                                </form>
+                            </tr>
+                </tbody>
+
+
+            </table>
+        </div>
+        <% } %>
+</div>
+
+<script>
+    const form = document.querySelector('.kill_change');
+    const tbody = document.querySelector('tbody');
+    const myArray = [
+        <% for (var i = 0; i < data.length; i++) { %>
+        { 'name': '<%= data[i].name %>', 'kills':<%= data[i].kills %>, 'speciality': '<%= data[i].speciality %>' },
+        <% }; %>
+
+        ];
+    console.log(myArray);
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const index = form.index.value;
+        const name = form.name.value;
+        const kills = form.kills.value;
+
+
+
+        let res = await fetch('/result/editresult/editkill', {
+            method: 'POST',
+            body: JSON.stringify({ index, name, kills }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        const data = await res.json();
+
+        if (res.status === 200) {
+            filterTable(myArray, name, kills);
+            form.kills.value = '';
+        }
+
+        console.log(data);
+        console.log(form.name.value);
+        console.log(form.kills.value);
+
+    });
+
+    function filterTable(data, name, kills) {
+
+        for (var i = 0; i < data.length; i++) {
+
+            var tr = document.getElementById(`tr-${i}`)
+            if (name === data[i].name) {
+                data[i].kills = kills;
+            }
+
+            var td = `
+                        <td>${data[i].name}</td>
+                        <td>${data[i].speciality}</td>
+                        <td>${data[i].kills}</td>
+                   `
+            tr.innerHTML = '';
+            tr.innerHTML += td;
+        };
+
+    };
+
+</script>

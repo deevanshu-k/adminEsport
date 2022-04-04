@@ -1,0 +1,29 @@
+<div class="result-visible">
+    <div class="head">Result Visible</div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Type</th>
+                    <th>Winprize</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0; i < data.length; i++) { %>
+                    <% if (data.length === 0) { %>
+                        <% exit; %>
+                     <% } %>
+                    <% if (data[i].rstatus <= 0) { %>
+                       <% continue; %>
+                    <% } %>
+                    <tr>
+                        <td><%= data[i].indexs %> </td>
+                        <td><%= data[i].type %></td>
+                        <td><%= data[i].win_prize %> </td>
+                    </tr>
+                <%}%>
+            </tbody>
+        </table>
+    </div>
+</div>
