@@ -5,18 +5,21 @@ var path = require('path');
 var fs = require('fs');
 const ejs = require("ejs");
 var JSON = require('JSON');
-var mysql = require('mysql');
+// var mysql = require('mysql');
 const { execSync } = require('child_process');
 const { stringify } = require('querystring');
 const { checkUser } = require('./middleware/authmiddleware');
 var cookies = require("cookie-parser");
 const authRoutes = require('./routes/authRoutes');
 // const errorHandler = require('./middleware/error_handleing');
-const { con, con1 } = require('./config/databaseConfig.js');
+// const { con, con1 } = require('./config/databaseConfig.js');
 const bodyparser = require('body-parser');
 const { exit } = require('process');
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
+
+var port = process.env.PORT;
+var host = process.env.HOST;
 
 const Sequelize = require('sequelize');
 const { Op } = require("sequelize");
@@ -26,8 +29,7 @@ const { createptable, top_players } = require('./modules/tourPlayers');
 const req = require('express/lib/request');
 
 
-var port = process.env.PORT;
-var host = process.env.HOST;
+
 
 app.use('/static', express.static('static'));
 app.use(express.urlencoded());
