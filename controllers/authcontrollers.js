@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { tour_users } = require('../modules/tourDetails');
+const { tour_users } = require('../models/tourDetails');
 require('dotenv').config();
 var port = process.env.PORT;
 var host = process.env.HOST;

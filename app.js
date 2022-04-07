@@ -24,8 +24,8 @@ var host = process.env.HOST;
 const Sequelize = require('sequelize');
 const { Op } = require("sequelize");
 const { tour_bgmi, tour_players } = require('./config/sequelize');
-const { tour_details, tour_users } = require('./modules/tourDetails');
-const { createptable, top_players } = require('./modules/tourPlayers');
+const { tour_details, tour_users } = require('./models/tourDetails');
+const { createptable, top_players } = require('./models/tourPlayers');
 const req = require('express/lib/request');
 
 
