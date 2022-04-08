@@ -1,10 +1,10 @@
-const { Sequelize, DataTypes } = require('sequelize');
-var { tour_players,tour_bgmi } = require('../config/sequelize');
+const { DataTypes } = require('sequelize');
+var { tour_bgmi } = require('../config/sequelize');
 
 
 function createptable(tablename) {
 
-  const players_add = tour_players.define(tablename, {
+  const players_add = tour_bgmi.define(tablename, {
     // Model attributes are defined here
 
     name: {
@@ -38,7 +38,7 @@ function createptable(tablename) {
 
 }
 
-const top_players = tour_players.define('top_player', {
+const top_players = tour_bgmi.define('top_player', {
   // Model attributes are defined here
 
   name: {

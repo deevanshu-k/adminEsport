@@ -212,6 +212,10 @@ x
     display: flex;
     justify-content: space-between;
   }
+
+  .add_player p:nth-child(4) input {
+    width: 180px;
+  }
   
   .add_player p:nth-child(5) input {
     width: 100%;

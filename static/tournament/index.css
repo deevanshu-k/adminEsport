@@ -304,6 +304,10 @@ x .links ul li {
   /* flex-wrap: wrap; */
 }
 
+.addtournament p:nth-child(8) input {
+  width: 180px;
+}
+
 .addtournament p:nth-child(12) input {
   width: 200px;
   height: 35px;

@@ -12,7 +12,6 @@ const { checkUser } = require('./middleware/authmiddleware');
 var cookies = require("cookie-parser");
 const authRoutes = require('./routes/authRoutes');
 // const errorHandler = require('./middleware/error_handleing');
-// const { con, con1 } = require('./config/databaseConfig.js');
 const bodyparser = require('body-parser');
 const { exit } = require('process');
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -23,8 +22,8 @@ var host = process.env.HOST;
 
 const Sequelize = require('sequelize');
 const { Op } = require("sequelize");
-const { tour_bgmi, tour_players } = require('./config/sequelize');
-const { tour_details, tour_users } = require('./models/tourDetails');
+const { tour_bgmi } = require('./config/sequelize');
+const { tour_details } = require('./models/tourDetails');
 const { createptable, top_players } = require('./models/tourPlayers');
 const req = require('express/lib/request');
 
@@ -49,18 +48,26 @@ app.get('*', checkUser);
 
 app.get('/', (req, res) => {
 
-   tour_details.findAll({
-      where: {
-         [Op.or]: [{ status: 1 }, { rstatus: 1 }]
-      }
-   })
-      .then((data) => {
-         res.status(200).render('dashboard', { heading: 'Dashboard', data, host, port, user: req.user });
+   try {
+      tour_bgmi.query(`SELECT COUNT(*) AS 'num' FROM tour_details;`).then((data) => {
+         req.body.num = data[0][0].num;
       })
-      .catch((error) => {
-         console.log(error);
-         res.status(505).redirect('/tournament');
+
+      tour_details.findAll({
+         where: {
+            [Op.or]: [{ status: 1 }, { rstatus: 1 }]
+         }
       })
+         .then((data) => {
+            // console.log(req.body.num);
+            res.status(200).render('dashboard', { heading: 'Dashboard', data, host, port, user: req.user, num: req.body.num, sh: req.body.sheduled_on });
+         })
+   } catch (error) {
+      console.log(error);
+      res.status(505).redirect('/tournament');
+   }
+
+
 
 });
 
@@ -139,23 +146,27 @@ app.post('/tournament/update', checkUser, (req, res) => {
 app.post('/tournament/removetour', checkUser, (req, res) => {
 
    if (req.body.index != '') {
-
-      tour_players.query(`drop table player_${req.body.index}s`)
-         .then(() => {
-            tour_details.destroy({
-               where: { indexs: req.body.index },
+      try {
+         tour_bgmi.query(`drop table player_${req.body.index}s`)
+            .then(() => {
+               tour_details.destroy({
+                  where: { indexs: req.body.index },
+               });
+               res.status(200).json({ error: 'Done!' });
             })
-            res.status(200).json({ error: 'Done!' });
-
-         })
-         .catch((error) => {
-            console.error(error);
-            res.status(505).json({ error: 'Tournament not exist' });
-
-         })
+      } catch (error) {
+         console.error(error);
+         res.status(505).json({ error: 'Tournament not exist' });
+      }
 
    };
 
+});
+app.get('/tournament/tourdetails', checkUser, (req, res) => {
+   tour_details.findAll({ where: { status: 1 } })
+   .then((data) => {
+      res.status(200).json(data);
+   });
 });
 
 
@@ -196,7 +207,7 @@ app.get('/result', (req, res) => {
 });
 app.post('/result/editresult', checkUser, (req, res) => {
 
-   tour_players.query(`SELECT * FROM player_${req.body.index}s`)
+   tour_bgmi.query(`SELECT * FROM player_${req.body.index}s`)
       .then((result) => {
          console.log(result[0]);
          var tpData = {
@@ -212,7 +223,7 @@ app.post('/result/editresult', checkUser, (req, res) => {
 });
 app.post('/result/editresult/editkill', checkUser, (req, res) => {
 
-   tour_players.query(`update player_${req.body.index}s set kills = '${req.body.kills}' where name = '${req.body.name}'`)
+   tour_bgmi.query(`update player_${req.body.index}s set kills = '${req.body.kills}' where name = '${req.body.name}'`)
       .then((result) => {
          console.log(result);
          res.status(200).json({ hello: 'done!' });
@@ -275,7 +286,7 @@ app.get('/player', (req, res) => {
 app.post('/player/updateap', checkUser, (req, res) => {
 
 
-   tour_players.query(`insert into player_${req.body.index}s (name,speciality,dateofenroll,createdAt,updatedAt) values ('${req.body.username}','${req.body.speciality}','${req.body.date}','${req.body.date}','${req.body.date}')`)
+   tour_bgmi.query(`insert into player_${req.body.index}s (name,speciality,dateofenroll,createdAt,updatedAt) values ('${req.body.username}','${req.body.speciality}','${req.body.date}','${req.body.date}','${req.body.date}')`)
       .then(() => {
          tour_bgmi.query(`update tour_details set player_joined = player_joined + 1 where indexs = ${req.body.index}`)
       }).catch((error) => {
@@ -288,7 +299,7 @@ app.post('/player/updateap', checkUser, (req, res) => {
 });
 app.post('/player/updaterp', checkUser, (req, res) => {
    if (req.body.index != '') {
-      tour_players.query(`delete from player_${req.body.index}s where name = '${req.body.username}'`)
+      tour_bgmi.query(`delete from player_${req.body.index}s where name = '${req.body.username}'`)
          .then(() => {
             tour_bgmi.query(`update tour_details set player_joined = player_joined - 1, updatedAt = NOW() where indexs = ${req.body.index}`)
          })

@@ -1,6 +1,6 @@
 ﻿Node js -> is a engine which run the code.
 express -> it is a module in which their are inbuild function used for web development.
-pub -> it is a tempelate engine which make a template ready (integrate CSS,HTML,JS
+ejs -> it is a tempelate engine which make a template ready (integrate CSS,HTML,JS
  file) before sending it to browser.
 ----------------------------------------------------------------------------------------------
 
@@ -8,7 +8,7 @@ file system:
 
 app.js
 |
-views  (html->pug files)
+views  (html->ejs files)
 |
 static  (css,js files)
 |
