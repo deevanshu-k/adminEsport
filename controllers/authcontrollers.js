@@ -12,7 +12,7 @@ function between(min, max) {
 }
 
 
-const maxAge = 1 * 24 * 60 * 60;
+const maxAge = 60 * 10;
 const createToken = (id,user) => {
   return jwt.sign({ id,user }, process.env.secrect_key, {
     expiresIn: maxAge

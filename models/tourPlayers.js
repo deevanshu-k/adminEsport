@@ -12,6 +12,26 @@ function createptable(tablename) {
       allowNull: false,
       defaultValue: ''
     },
+    email: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: ''
+    },
+    phone: {
+      type: DataTypes.INTEGER(12),
+      allowNull: false,
+      defaultValue: '0000000000'
+    },
+    pubg_userid: {
+      type: DataTypes.INTEGER(12),
+      allowNull: false,
+      defaultValue: '0000000000'
+    },
+    pubg_username: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: ''
+    },
     kills: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -26,6 +46,17 @@ function createptable(tablename) {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: '0000-00-00'
+    },
+    paymentstatus: {
+      type: DataTypes.CHAR,
+      allowNull: true,
+      defaultValue: '0'
+    }
+    ,
+    paymentid: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      defaultValue: '0'
     }
   }, {
     // Other model options go here

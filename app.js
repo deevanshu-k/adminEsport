@@ -5,6 +5,7 @@ var path = require('path');
 var fs = require('fs');
 const ejs = require("ejs");
 var JSON = require('JSON');
+const Razorpay = require('razorpay');
 // var mysql = require('mysql');
 const { execSync } = require('child_process');
 const { stringify } = require('querystring');
@@ -14,6 +15,8 @@ const authRoutes = require('./routes/authRoutes');
 // const errorHandler = require('./middleware/error_handleing');
 const bodyparser = require('body-parser');
 const { exit } = require('process');
+const cors = require("cors");
+
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
@@ -27,6 +30,18 @@ const { tour_details } = require('./models/tourDetails');
 const { createptable, top_players } = require('./models/tourPlayers');
 const req = require('express/lib/request');
 
+const corsOptions = {
+   origin: `${process.env.ClientServer}`
+};
+
+const razorpayInstance = new Razorpay({
+
+   // Replace with your key_id
+   key_id: 'rzp_test_vGLIw0CCxPM8kB',
+
+   // Replace with your key_secret
+   key_secret: '35uN022q4mg8AZSLmdL0uKAn'
+});
 
 
 
@@ -66,7 +81,6 @@ app.get('/', (req, res) => {
       console.log(error);
       res.status(505).redirect('/tournament');
    }
-
 
 
 });
@@ -164,10 +178,14 @@ app.post('/tournament/removetour', checkUser, (req, res) => {
 });
 app.get('/tournament/tourdetails', checkUser, (req, res) => {
    tour_details.findAll({ where: { status: 1 } })
-   .then((data) => {
-      res.status(200).json(data);
-   });
+      .then((data) => {
+         res.status(200).json(data);
+      });
 });
+// app.post('/tournament/CreateOrder',(req,res) => {
+//    console.log("hi");
+//    res.json("hi");
+// });
 
 
 
@@ -286,7 +304,7 @@ app.get('/player', (req, res) => {
 app.post('/player/updateap', checkUser, (req, res) => {
 
 
-   tour_bgmi.query(`insert into player_${req.body.index}s (name,speciality,dateofenroll,createdAt,updatedAt) values ('${req.body.username}','${req.body.speciality}','${req.body.date}','${req.body.date}','${req.body.date}')`)
+   tour_bgmi.query(`insert into player_${req.body.index}s (name,speciality,dateofenroll,paymentstatus,createdAt,updatedAt) values ('${req.body.username}','${req.body.speciality}','${req.body.date}','0','${req.body.date}','${req.body.date}')`)
       .then(() => {
          tour_bgmi.query(`update tour_details set player_joined = player_joined + 1 where indexs = ${req.body.index}`)
       }).catch((error) => {
@@ -314,6 +332,59 @@ app.post('/player/updaterp', checkUser, (req, res) => {
 });
 
 
+app.get('/payments', (req, res) => {
+   razorpayInstance.payments.all().then((data) => {
+      console.log(data);
+   });
+   res.status(200).render('payment', { heading: 'Payment', host, port, user: req.user });
+
+});
+// app.post('/payment/createorder', cors(corsOptions), (req, res)=>{ 
+//   console.log(req.query.index);
+//    // STEP 1:
+//    // const {amount,currency,receipt, notes}  = req.body;      
+
+//    // STEP 2:    
+//    // razorpayInstance.orders.create({amount, currency, receipt, notes}, 
+//    //     (err, order)=>{
+
+//    //       //STEP 3 & 4: 
+//    //       if(!err)
+//            res.json('hi from server');
+//    //       else
+//    //         res.send(err);
+//    //     }
+//    // )
+// });
+app.post('/paymentcompcall', (req, res) => {
+   console.log(req.body);
+   var paymentId = req.body.payload.payment.entity.id;
+   console.log(req.body.payload.payment.entity);
+   razorpayInstance.accounts.fetch({ paymentId }, (err, details) => {
+      if (err) {
+         console.log(err)
+      }
+      else {
+         var notes = details.notes;
+         var paymentstatus = details.status;
+         var paymentid = details.id;
+         tour_bgmi.query(`insert into player_${req.body.index}s`)
+         console.log(details);
+      }
+   });
+   // razorpayInstance.orders.create({ paymentId },
+   //    (err, order) => {
+
+   //       //STEP 3 & 4: 
+   //       if (!err)
+   //          res.json('hi from server');
+   //       else
+   //          res.send(err);
+   //    }
+   // )
+   // console.log(a);
+   res.status(200).send();
+})
 
 
 app.get('/setting', (req, res) => {
@@ -342,7 +413,16 @@ app.use((error, req, res, next) => {
 })
 
 
+
 var server = app.listen(port, function () {
    // var port = server.address().port
-   console.log("Example app listening at http://%s:%s", host, port)
+   console.log("app listening at http://%s:%s", host, port)
 })
+
+// const ngrok = require('ngrok');
+// (async function() {
+//   const url = await ngrok.connect(85);
+//   console.log(url);
+// })().catch((error) => {
+//    console.log(error);
+// });
