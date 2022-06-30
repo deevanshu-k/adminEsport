@@ -183,14 +183,13 @@ x
   flex-wrap: wrap;
 }
 
-/* add_player  */
+/* add_user  */
 
-.add_player {
+.add_user {
   background-color: white;
-  width: 230px;
-  /* height: 120px; */
+  min-width: 230px;
+  /* height: 230px; */
   padding: 0px 12px;
-  /* overflow: scroll; */
   cursor: pointer;
   border-radius: 6px;
   margin: 20px;
@@ -200,42 +199,26 @@ x
   align-items: center;
 }
 
-.add_player .head {
+.add_user .head {
   font-weight: bold;
   padding: 10px 0px;
 }
 
-.add_player label{
+.add_user label {
   font-weight: 600;
   width: 100px;
 }
 
-
-
-.add_player p {
+.add_user p {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
 }
 
-.add_player p span {
-    width: 100px;
-    text-align: center;
-    font-weight: bold;
-}
+/* .add_user p:nth-child(4) input {
+  width: 180px;
+} */
 
-.add_player .playerdata {
-    height: 150px;
-    overflow: scroll;
-    overflow-x: hidden;
-    margin: 10px 0px;
-}
-
-.add_player .playerdata input {
-    width: 50px;
-}
-
-.add_player .submit input {
+.add_user p:nth-child(3) input {
   width: 100%;
   color: rgba(0, 0, 0, 0.836);
   font-weight: 700;
@@ -246,13 +229,9 @@ x
   cursor: pointer;
 }
 
-.add_player .submit input:hover {
+.add_user p:nth-child(3) input:hover {
   background-color: #4169e1;
   color: white;
-}
-
-.add_player .playerdata {
-    padding: 0px 20px;
 }
 
 /* common  */

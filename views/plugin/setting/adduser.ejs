@@ -1,0 +1,20 @@
+<div class="add_user">
+    <div class="head">Add User</div>
+    <div class="addform">
+        <form autocomplete="off" action="http://<%= host %>:<%= port %>/setting/adduser" method="post">
+            
+            <p>
+                <label for="">Username</label>
+                <input autocomplete="false" type="text" required name="username" id="">
+            </p>
+            
+            <p>
+                <label for="">Password</label>
+                <input type="password" required name="pwd" id="">
+            </p>
+            <p>
+                <input type="submit" value="ADD">
+            </p>
+        </form>
+    </div>
+</div>

@@ -5,6 +5,7 @@ var path = require('path');
 var fs = require('fs');
 const ejs = require("ejs");
 var JSON = require('JSON');
+const bcrypt = require('bcrypt');
 const Razorpay = require('razorpay');
 // var mysql = require('mysql');
 const { execSync } = require('child_process');
@@ -26,7 +27,8 @@ var host = process.env.HOST;
 const Sequelize = require('sequelize');
 const { Op } = require("sequelize");
 const { tour_bgmi } = require('./config/sequelize');
-const { tour_details } = require('./models/tourDetails');
+// const { tour_users } = require('../models/tourDetails');
+const { tour_details, tour_users } = require('./models/tourDetails');
 const { createptable, top_players } = require('./models/tourPlayers');
 const req = require('express/lib/request');
 
@@ -368,7 +370,7 @@ app.post('/paymentcompcall', (req, res) => {
          var notes = details.notes;
          var paymentstatus = details.status;
          var paymentid = details.id;
-         tour_bgmi.query(`insert into player_${req.body.index}s`)
+         // tour_bgmi.query(`insert into player_${req.body.index}s`)
          console.log(details);
       }
    });
@@ -391,6 +393,40 @@ app.get('/setting', (req, res) => {
    res.status(200).render('setting', { heading: 'Setting', host, port, user: req.user });
 });
 
+app.post('/setting/adduser', async (req, res) => {
+
+   console.log(req.body);
+   try {
+      function between(min, max) {
+         return Math.floor(
+            Math.random() * (max - min) + min
+         )
+      }
+
+      salt = await bcrypt.genSalt(10);
+      a = await bcrypt.hash(req.body.pwd, salt);
+      console.log(salt);
+      console.log('   ');
+      console.log(a);
+
+      tour_users.create({
+         user: req.body.username,
+         hash: a,
+         userid: between(125500, 200000),
+      })
+   } catch (err) {
+      res.status(204).redirect('/setting');
+      console.log(err);
+   }
+
+   res.status(200).redirect('/setting');
+})
+app.post('/setting/upusername', (req, res) => {
+
+})
+app.post('/setting/upusername', (req, res) => {
+
+})
 
 
 
