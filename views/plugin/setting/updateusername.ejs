@@ -1,0 +1,73 @@
+<div class="update_username">
+    <div class="head">Update Username</div>
+    <div class="addform">
+        <form autocomplete="off" id="upusername_form" method="post">
+
+            <p>
+                <label for="">Username</label>
+                <input autocomplete="false" type="text" required name="username" id="" placeholder="username">
+            </p>
+
+            <p>
+                <label for="">Username</label>
+                <input type="text" required name="updatedusername" id="" placeholder="new username">
+            </p>
+            <p>
+                <input type="submit" value="ADD">
+            </p>
+            <div class="upuserpwderror"></div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // add_total_player
+    // remove_player
+    const upusername = document.querySelector('#upusername_form');
+    const upusernameerror = document.querySelector('.upuserpwderror');
+
+    upusername.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        upusernameerror.textcontent = '';
+
+
+        const username = upusername.username.value;
+        // const kills = upusername.kills.value;
+        const updatedusername = upusername.updatedusername.value;
+        // const index = upusername.index.value;
+
+
+
+        let res = await fetch('/setting/upusername', {
+            method: 'POST',
+            body: JSON.stringify({username, updatedusername }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        const data = await res.json();
+        if (res.status === 505) {
+            upusernameerror.textContent = data.Status;
+            setTimeout(() => {
+                upusernameerror.textContent = '';
+            }, 3000);
+        }
+        else {
+            upusernameerror.textContent = data.Status;
+            setTimeout(() => {
+                upusernameerror.textContent = '';
+            }, 3000);
+            // var tpDataso = document.getElementById(`tpDataso`)
+            // var option = `
+            // <option value="${name}">${name}</option>
+            //        `
+            // tpDataso.innerHTML += option;
+        }
+        upusername.username.value = '';
+        // upusername.kills.value = '';
+        upusername.updatedusername.value = '';
+        // upusername.index.value = '';
+        console.log(data);
+
+
+    });
+</script>

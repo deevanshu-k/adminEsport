@@ -422,6 +422,31 @@ app.post('/setting/adduser', async (req, res) => {
    res.status(200).redirect('/setting');
 })
 app.post('/setting/upusername', (req, res) => {
+   console.log(req.body);
+   const objectToUpdate = {
+      user: 'Hello World',
+      description: 'Hello World'
+   }
+
+   tour_users.update({ user: `${req.body.updatedusername}` }, { where: { user: `${req.body.username}` } })
+
+      .then((status) => {
+         // console.log("done");
+         console.log(status[0]);
+         if (status[0] == 0) {
+            res.status(505).json({ Status: 'Enter correct username!' })
+         }
+         else {
+            res.status(200).json({ Status: 'Username updated sucessfully!' })
+         }
+      })
+      .catch((error) => {
+         // console.log(error);
+         // console.log("hi");
+         console.log("update user name error!\n" + error);
+         res.status(505).json({ Status: 'Server error occured!' })
+      })
+   // res.status(200).json({ Status: 'Player data inserted!' })
 
 })
 app.post('/setting/upusername', (req, res) => {

@@ -233,6 +233,70 @@ x
   background-color: #4169e1;
   color: white;
 }
+/* update_username  */
+
+.update_username {
+  background-color: white;
+  min-width: 230px;
+  /* height: ; */
+  min-height: 170px;
+  padding: 0px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.update_username .head {
+  font-weight: bold;
+  padding: 10px 0px;
+}
+
+.update_username label {
+  font-weight: 600;
+  width: 100px;
+}
+
+.update_username p {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .add_user p:nth-child(4) input {
+  width: 180px;
+} */
+
+.update_username p:nth-child(3) input {
+  width: 100%;
+  color: rgba(0, 0, 0, 0.836);
+  font-weight: 700;
+  background-color: #80808060;
+  border: 0px;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.update_username p:nth-child(3) input:hover {
+  background-color: #4169e1;
+  color: white;
+}
+
+.update_username .upuserpwderror {
+  position: relative;
+  /* right: 50px; */
+  text-align: center;
+  bottom: 19px;
+  font-size: 15px;
+  font-weight: bold;
+  /* width: ; */
+  height: 15px;
+  padding: 3px;
+  color: #fa051d83;
+}
 
 /* common  */
 .left-panel,.right-panel {
