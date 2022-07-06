@@ -161,21 +161,22 @@ app.post('/tournament/update', checkUser, (req, res) => {
 });
 app.post('/tournament/removetour', checkUser, (req, res) => {
 
-   if (req.body.index != '') {
-      try {
-         tour_bgmi.query(`drop table player_${req.body.index}s`)
-            .then(() => {
-               tour_details.destroy({
-                  where: { indexs: req.body.index },
-               });
-               res.status(200).json({ error: 'Done!' });
-            })
-      } catch (error) {
-         console.error(error);
-         res.status(505).json({ error: 'Tournament not exist' });
-      }
 
-   };
+
+      tour_bgmi.query(`drop table player_${req.body.index}s`)
+         .then(() => {
+            tour_details.destroy({
+               where: { indexs: req.body.index },
+            });
+            res.status(200).json({ error: 'Done!' });
+         })
+         .catch((error) => {
+            console.error(error);
+            res.status(505).json({ error: 'Tournament not exist!' });
+         })
+
+
+   
 
 });
 app.get('/tournament/tourdetails', checkUser, (req, res) => {
