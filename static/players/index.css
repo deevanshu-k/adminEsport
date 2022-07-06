@@ -213,11 +213,11 @@ x
     justify-content: space-between;
   }
 
-  .add_player p:nth-child(4) input {
+  .add_player p:nth-child(8) input {
     width: 180px;
   }
   
-  .add_player p:nth-child(5) input {
+  .add_player p:nth-child(9) input {
     width: 100%;
     color: rgba(0, 0, 0, 0.836);
     font-weight: 700;
@@ -228,7 +228,7 @@ x
     cursor: pointer;
   }
   
-  .add_player p:nth-child(5) input:hover {
+  .add_player p:nth-child(9) input:hover {
     background-color: #4169e1;
     color: white;
   }

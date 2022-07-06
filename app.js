@@ -305,8 +305,9 @@ app.get('/player', (req, res) => {
 });
 app.post('/player/updateap', checkUser, (req, res) => {
 
+   console.log(req.body);
 
-   tour_bgmi.query(`insert into player_${req.body.index}s (name,speciality,dateofenroll,paymentstatus,createdAt,updatedAt) values ('${req.body.username}','${req.body.speciality}','${req.body.date}','0','${req.body.date}','${req.body.date}')`)
+   tour_bgmi.query(`insert into player_${req.body.index}s (name,email,phone,pubg_userid,pubg_username,speciality,dateofenroll,paymentstatus,createdAt,updatedAt) values ('${req.body.name}','${req.body.email}','${req.body.phone}','${req.body.pubguserid}','${req.body.pubgusername}','${req.body.speciality}','${req.body.date}','0','${req.body.date}','${req.body.date}')`)
       .then(() => {
          tour_bgmi.query(`update tour_details set player_joined = player_joined + 1 where indexs = ${req.body.index}`)
       }).catch((error) => {

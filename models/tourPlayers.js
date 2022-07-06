@@ -18,12 +18,12 @@ function createptable(tablename) {
       defaultValue: ''
     },
     phone: {
-      type: DataTypes.INTEGER(12),
+      type: DataTypes.BIGINT,
       allowNull: false,
       defaultValue: '0000000000'
     },
     pubg_userid: {
-      type: DataTypes.INTEGER(12),
+      type: DataTypes.BIGINT,
       allowNull: false,
       defaultValue: '0000000000'
     },
